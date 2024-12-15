@@ -1,0 +1,113 @@
+# include <iostream>
+using namespace std;
+
+class student
+{
+    string name;
+    int roll_num;
+    string cls;
+    string div;
+    string dob;
+    string bloodgroup;
+    string caddress;
+    long int telephone;
+    long int dlno;
+
+    
+    static int count;
+
+    public:
+        student()
+        { 
+            name = " ";
+            roll_num = 0 ;
+            cls = " ";
+            div = " ";
+            dob =" dd/mm/yyyy";
+            bloodgroup = " ";
+            caddress = " ";
+            telephone = 0;
+            dlno = 0;
+        
+        }
+
+        
+        
+        static int getcount()
+        {
+            return count ;
+        }
+        void getdata();
+        void dispdata();
+};
+int student::count = 0;
+
+inline void student :: getdata()
+{
+    cout<<"Enter the name of student:";
+    cin>> name;
+    cout<<"Enter the roll number of student:";
+    cin>>roll_num;
+    cout<<"Enter the class of student:";
+    cin>>cls;
+    cout<<"Enter the division of student:";
+    cin>>div;
+    cout<<"Enter the dob of student:";
+    cin>>dob;
+    cout<<"Enter the bloodgroup of student:";
+    cin>>bloodgroup;
+    cout<<"Enter the address of student:";
+    cin>>caddress;
+    cout<<"Enter the telephone number of student:";
+    cin>>telephone;
+    cout<<"Enter the driving license number of student:";
+    cin>>dlno;
+    
+    count++;
+}
+
+
+inline void student :: dispdata()
+{
+    // Display personal data
+    cout << "Student Name: " << name << endl;
+    cout << "Roll Number: " << roll_num << endl;
+    cout << "Class: " << cls << endl;
+    cout << "Division: " << div << endl;
+    cout << "Date of Birth: " << dob << endl;
+    cout << "Blood Group: " << bloodgroup << endl;
+
+    // Display contact data
+    cout << "Contact Address: " << caddress << endl;
+    cout << "Telephone Number: " << telephone << endl;
+    cout << "Driving License Number: " << dlno << endl;
+}
+
+int main()
+{
+    student students[100]; // Stack-allocated array of Student objects
+    int n = 0;
+    char ch;
+
+    do
+    {
+        students[n].getdata();  // Input student data directly on stack
+        n++;
+        cout << "Do you want to add another student (y/n): ";
+        cin >> ch;
+        cin.get();  // To capture newline character after 'y' or 'n'
+    } while (ch == 'y' || ch == 'Y');
+
+    // Display all student data
+    for(int i = 0; i < n; i++)
+    {
+        cout << "---------------------------------------------------------------" << endl;
+        students[i].dispdata();
+    }
+
+    cout << "---------------------------------------------------------------" << endl;
+    cout << "Total Students: " << student::getcount() << endl;
+    cout << "---------------------------------------------------------------" << endl;
+
+    return 0;
+}
