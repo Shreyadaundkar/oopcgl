@@ -1,0 +1,87 @@
+#include<iostream>
+using namespace std;
+class complex
+{
+    float real;
+    float img;
+public :
+     
+    	complex()
+    	{
+    	    real = 0;
+    	    img = 0;
+    	}
+
+complex operator+(complex obj)
+{
+    complex temp;
+    temp.real = real + obj.real;
+    temp.img = img + obj.img;
+    return temp;
+}
+
+  complex operator*(complex obj)
+{
+    complex temp;
+    temp.real = real * obj.real - img * obj.img;
+    temp.img = real * obj.img + img * obj.real;
+    return temp;
+}
+
+
+
+ friend ostream & operator << (ostream &out, complex &obj)
+{
+    if(obj.img >= 0)
+    	out<<obj.real<<"+"<<obj.img<<"i\n";
+    else 		
+    	out<<obj.real<<obj.img<<"i\n";
+    return out;
+}
+
+ friend istream & operator >> (istream &in, complex &c)
+{
+    cout<<"Enter Real Part : ";
+    in>>c.real;
+    cout<<"Enter Imaginary Part : ";
+    in>>c.img;
+    return in;
+}
+};
+int main()
+{
+    complex c1, c2, c3;
+    int ch;
+    cout<<"In the begining :-\n";
+    cin>>c1;
+    cin>>c2;
+    cout<<c1;
+    cout<<c2<<endl;
+    
+    do
+    {
+    	cout<<"\nMENU";
+    	cout<<"\n1. Addition";
+    	cout<<"\n2. Multiplication";
+    	
+    	cout<<"\n3.Exit";
+    	cout<<"\nEnter your choice : ";
+    	cin>>ch;
+    	switch(ch)
+    	{
+    	    case 1 : c3 = c1 + c2;
+    	    	     cout<<"\n Addition : ";
+    	    	     cout<<c3;
+    	    	     break;
+    	    case 2 : c3 = c1 * c2;
+    	    	     cout<<"\n Multiplication : ";
+    	    	     cout<<c3;
+    	    	     break;
+    	    
+    	    case 3: break;
+    	        cout<<"Invalid choice !\n";
+    	}
+    }while(ch != 3);
+    return 0;
+}
+
