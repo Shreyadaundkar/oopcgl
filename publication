@@ -1,0 +1,104 @@
+# include <iostream>
+using namespace std;
+
+class publication
+{
+	protected:
+		string title ;
+		float price;
+	public :
+		publication()
+		{
+			title = " ";
+			price = 0.0 ;
+		}
+		publication(string t,float p)
+		{
+			title = t;
+			price = p;
+		}
+	public :
+	void getdata()
+	{
+		cout<<"The book name:";
+		cin>>title;
+		cout<<"The price:";
+		cin>>price;
+	}
+	void putdata()
+	{
+		cout<<"The book name is:"<<title<<endl;
+		cout<<"The price of book:"<<price<<endl;
+			}
+	
+};
+
+class book:public publication
+{
+	int pagecount ;
+	public:
+		book()
+		{
+			pagecount = 0;
+		}
+		book(string t,float p,int pc):publication(t,p)
+		{
+			pagecount = pc;
+		}
+		void getdata()
+		{
+		 publication :: getdata();
+		 cout<<"the page count :";
+		 cin>>pagecount;
+			
+		}
+		void putdata()
+		{
+			publication::putdata();
+			cout<<"The pagecount is:"<<pagecount<<endl;
+		}
+};
+class tape:public publication
+{
+	int time1 ;
+	public:
+		tape()
+		{
+			time1 = 0;
+		}
+		tape(string t,float p,int tim):publication(t,p)
+		{
+			time1 = tim;
+		}
+		void getdata()
+		{
+		 publication :: getdata();
+		 cout<<"the time of tape :";
+		 cin>>time1;
+			
+		}
+		void putdata()
+		{
+			publication::putdata();
+			cout<<"The tape time is:"<<time1<<endl;
+		}
+};
+
+int main()
+{
+	
+	
+	book publica("shreya",450,45);
+	publica.putdata();
+	
+	cout<<"........... INPUT Book details..........."<<endl;
+	publica.getdata();
+		cout<<"...........Book details..........."<<endl;
+	publica.putdata();
+	tape publicat;
+	cout<<"........... INPUT Book details..........."<<endl;
+	publicat.getdata();
+		cout<<"...........Book details..........."<<endl;
+	publicat.putdata();
+	
+}
