@@ -1,0 +1,101 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+// Define a structure for storing Person information
+class Person {
+public:
+    string name;
+    string birth_date; // Birth date in DD-MM-YYYY format
+    long telephone_no;
+
+    // Function to input person details
+    void getdata() {
+        cout << "\nEnter Person Information\n";
+        cout << "Enter Name: ";
+        cin >> name;
+        cout << "Enter Birth Date (DD-MM-YYYY): ";
+        cin >> birth_date;
+        cout << "Enter Telephone Number: ";
+        cin >> telephone_no;
+    }
+
+    // Function to display person details
+    void display() const {
+        cout << "\n--- Person Data ---";
+        cout << "\nName: " << name;
+        cout << "\nBirth Date: " << birth_date;
+        cout << "\nTelephone: " << telephone_no << endl;
+    }
+};
+
+// Comparator function to sort by name
+bool compareByName(const Person& p1, const Person& p2) {
+    return p1.name < p2.name;
+}
+
+// Comparator function to sort by birth date
+bool compareByBirthDate(const Person& p1, const Person& p2) {
+    return p1.birth_date < p2.birth_date;
+}
+
+// Comparator function to sort by telephone number
+bool compareByTelephone(const Person& p1, const Person& p2) {
+    return p1.telephone_no < p2.telephone_no;
+}
+
+int main() {
+    vector<Person> persons; // Use vector to store Person records
+    int n;
+    string searchName;
+
+    // Input number of persons
+    cout << "\nEnter Number of Persons: ";
+    cin >> n;
+
+    // Input person details
+    for (int i = 0; i < n; i++) {
+        Person p;
+        p.getdata();
+        persons.push_back(p); // Add person to the vector
+    }
+
+    // Sort persons by name using STL sort
+    sort(persons.begin(), persons.end(), compareByName);
+    cout << "\nSorted Person Records by Name:\n";
+    for (const auto& person : persons) {
+        person.display();
+    }
+
+    // Search for a person by name
+    cout << "\nEnter Name to Search: ";
+    cin >> searchName;
+    auto it = find_if(persons.begin(), persons.end(), [&](const Person& p) {
+        return p.name == searchName;
+    });
+
+    if (it != persons.end()) {
+        cout << "\nRecord Found:\n";
+        it->display();
+    } else {
+        cout << "\nRecord Not Found!\n";
+    }
+
+    // Sort persons by birth date using STL sort
+    sort(persons.begin(), persons.end(), compareByBirthDate);
+    cout << "\nSorted Person Records by Birth Date:\n";
+    for (const auto& person : persons) {
+        person.display();
+    }
+
+    // Sort persons by telephone number using STL sort
+    sort(persons.begin(), persons.end(), compareByTelephone);
+    cout << "\nSorted Person Records by Telephone Number:\n";
+    for (const auto& person : persons) {
+        person.display();
+    }
+
+    return 0;
+}
